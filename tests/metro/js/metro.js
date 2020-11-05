@@ -1,7 +1,7 @@
 /*
  * Metro 4 Components Library v4.4.1  (https://metroui.org.ua)
  * Copyright 2012-2020 Sergey Pimenov
- * Built at 04/11/2020 02:11:11
+ * Built at 04/11/2020 23:38:37
  * Licensed under GPL3
  */
 (function (global, undefined) {
@@ -4537,7 +4537,7 @@ $.noConflict = function() {
     var Metro = {
 
         version: "4.4.1",
-        compileTime: "04/11/2020 02:11:11",
+        compileTime: "04/11/2020 23:38:37",
         buildNumber: "@@build",
         isTouchable: isTouch,
         fullScreenEnabled: document.fullscreenEnabled,
@@ -26239,6 +26239,8 @@ $.noConflict = function() {
         }
     });
 }(Metro, m4q));
+
+
 
 (function(Metro, $) {
     'use strict';
