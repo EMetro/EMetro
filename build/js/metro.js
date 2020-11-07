@@ -1,7 +1,7 @@
 /*
  * Metro 4 Components Library v4.4.1  (https://metroui.org.ua)
  * Copyright 2012-2020 Sergey Pimenov
- * Built at 04/11/2020 23:38:37
+ * Built at 07/11/2020 05:03:48
  * Licensed under GPL3
  */
 (function (global, undefined) {
@@ -4537,7 +4537,7 @@ $.noConflict = function() {
     var Metro = {
 
         version: "4.4.1",
-        compileTime: "04/11/2020 23:38:37",
+        compileTime: "07/11/2020 05:03:48",
         buildNumber: "@@build",
         isTouchable: isTouch,
         fullScreenEnabled: document.fullscreenEnabled,
@@ -26240,7 +26240,58 @@ $.noConflict = function() {
     });
 }(Metro, m4q));
 
+(function(Metro , $) {
+  'use strict';
 
+  var Utils = Metro.utils;
+  var startMenuDefaultConfig = {};
+
+  Metro.startMenuSetup = function (options) {
+    startMenuDefaultConfig = $.extend({}, startMenuDefaultConfig, options);
+  };
+
+  if (typeof window["metroStartMenuSetup"] !== undefined) {
+    Metro.startMenuSetup(window["metroStartMenuSetup"]);
+  }
+
+  Metro.Component('start-menu', {
+    init: function (options, elem) {
+      this._super(elem, options, startMenuDefaultConfig, {
+          id: Utils.elementId('start-menu')
+      });
+
+      return this;
+    },
+
+    _create: function () {
+      this._createStructure();
+      this._createEvents();
+    },
+
+    _createStructure: function () {
+      var element = this.element;
+
+      element.addClass("start-menu");
+    },
+
+    _createEvents: function () {
+      var element = this.element;
+      var sideNav = element.find('.sidenav-simple');
+
+      $('[data-target="' + element.attr('data-role') + '"]').on(Metro.events.click , function() {
+        element.toggle();
+      });
+
+      sideNav.on(Metro.events.enter , function() {
+        sideNav.addClass('sidenav-simple-expand-xxl win-shadow');
+      });
+
+      sideNav.on(Metro.events.leave , function() {
+        sideNav.removeClass('sidenav-simple-expand-xxl win-shadow');
+      });
+    }
+  });
+}(Metro , m4q));
 
 (function(Metro, $) {
     'use strict';

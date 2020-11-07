@@ -2,6 +2,7 @@
 @import (once) "../../include/mixins";
 
 .start-menu {
+  display: none;
   background: green;
   position: fixed;
   left: 0;
@@ -15,11 +16,20 @@
     height: 100%;
     background-color: transparent;
     color: @white;
-    li:hover {
-      background-color: rgba(255, 255, 255, 0.1);
+    li {
+      background-color: transparent;
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
     }
-  }
-  a:not([class]):hover {
-    color: unset;
+    a {
+      background-color: transparent;
+      &:not([class]):hover {
+        color: unset
+      }
+    }
+    &.hover {
+      background-color: rgba(0,0,0,0.2);
+    }
   }
 }
