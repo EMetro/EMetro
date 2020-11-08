@@ -41,6 +41,7 @@
   ],
   "devDependencies": {
     "autoprefixer": "^9.8.4",
+    "babel-eslint": "^10.1.0",
     "cypress": "^4.9.0",
     "eslint": "^7.3.1",
     "grunt": "^1.1.0",

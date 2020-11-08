@@ -118,7 +118,7 @@ module.exports = function(grunt) {
                 "source/metro-common.less": createLessFile("common", ["source/common/less/reset.less"])
             },
             "icons-less": {
-                "source/metro-icons.less": createLessFile(['icons/mif-base', 'icons/mif-icons'])
+                "source/metro-icons.less": createLessFile(['icons/mif-base', 'icons/mif-icons' , 'icons/micon.less'])
             },
             "reset-less": {
                 "source/metro-reset.less": createLessFile(['common/less/reset'])

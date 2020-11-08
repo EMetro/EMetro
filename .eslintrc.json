@@ -13,5 +13,6 @@
         "ecmaVersion": 5
     },
     "rules": {
-    }
+    } ,
+    "parser": "babel-eslint"
 }

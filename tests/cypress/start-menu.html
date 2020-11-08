@@ -8,10 +8,12 @@
 <body class="m4-cloak">
   <div class="container">
     <div data-role="start-menu">
-      <ul class="sidenav-simple d-flex flex-column-r">
-        <li><a href="#">
-            <span class="mif-apps icon"></span>
-            <span class="title">all items</span>
+      <ul class="sidenav-simple d-flex flex-column-r" data-popover-width-fix="power-popover">
+        <li><a href="#" data-role="popover" data-popover-text="This is popover!" data-popover-trigger="click"
+              data-popover-position="top" data-popover-hide="0" data-close-button="false" data-cls-popover="power-popover"
+              data-offset="0" id="power-popover">
+            <i class="mi mi-PowerButton icon"></i>
+            <span class="title">Power</span>
         </a></li>
         <li><a href="#">
           <span class="mif-apps icon"></span>

@@ -1,7 +1,7 @@
 /*
  * Metro 4 Components Library v4.4.1  (https://metroui.org.ua)
  * Copyright 2012-2020 Sergey Pimenov
- * Built at 07/11/2020 05:03:48
+ * Built at 08/11/2020 04:26:14
  * Licensed under GPL3
  */
 *,
@@ -34163,6 +34163,12 @@ input.input-small:-ms-input-placeholder {
 }
 .start-menu .sidenav-simple.hover {
   background-color: rgba(0, 0, 0, 0.2);
+}
+.start-menu .sidenav-simple .title {
+  text-transform: none;
+}
+.power-popover {
+  left: 0 !important;
 }
 .stepper {
   display: -webkit-box;

@@ -1,7 +1,7 @@
 /*
  * Metro 4 Components Library v4.4.1  (https://metroui.org.ua)
  * Copyright 2012-2020 Sergey Pimenov
- * Built at 07/11/2020 05:03:48
+ * Built at 08/11/2020 04:26:14
  * Licensed under GPL3
  */
 (function (global, undefined) {
@@ -4537,7 +4537,7 @@ $.noConflict = function() {
     var Metro = {
 
         version: "4.4.1",
-        compileTime: "07/11/2020 05:03:48",
+        compileTime: "08/11/2020 04:26:14",
         buildNumber: "@@build",
         isTouchable: isTouch,
         fullScreenEnabled: document.fullscreenEnabled,
@@ -22574,6 +22574,8 @@ $.noConflict = function() {
 
         _createEvents: function(){
             var that = this, element = this.element, o = this.options;
+            o.popoverOffset = (element.attr('data-offset') !== undefined && element.attr('data-offset') !== null) ?
+              parseInt(element.attr('data-offset')) : o.popoverOffset;
             var event;
 
             switch (o.popoverTrigger) {
@@ -22648,6 +22650,8 @@ $.noConflict = function() {
             var neb_pos;
             var id = Utils.elementId("popover");
             var closeButton;
+            var min_width = ($('[data-popover-width-fix="' + element.id() + '"]').length !== 0) ?
+              $('[data-popover-width-fix="' + element.id() + '"]').width() : false;
 
             if (this.popovered) {
                 return ;
@@ -22656,6 +22660,10 @@ $.noConflict = function() {
             popover = $("<div>").addClass("popover neb").addClass(o.clsPopover);
             popover.attr("id", id);
 
+            if(min_width) {
+              popover.css('min-width' , min_width);
+            }
+            
             $("<div>").addClass("popover-content").addClass(o.clsPopoverContent).html(o.popoverText).appendTo(popover);
 
             if (o.popoverHide === 0 && o.closeButton === true) {
@@ -26244,7 +26252,9 @@ $.noConflict = function() {
   'use strict';
 
   var Utils = Metro.utils;
-  var startMenuDefaultConfig = {};
+  var startMenuDefaultConfig = {
+    popover: null
+  };
 
   Metro.startMenuSetup = function (options) {
     startMenuDefaultConfig = $.extend({}, startMenuDefaultConfig, options);
@@ -26264,8 +26274,14 @@ $.noConflict = function() {
     },
 
     _create: function () {
+      var element = this.element;
+
       this._createStructure();
       this._createEvents();
+
+      this._fireEvent("start-menu-create", {
+        element: element
+      });
     },
 
     _createStructure: function () {
@@ -26275,20 +26291,52 @@ $.noConflict = function() {
     },
 
     _createEvents: function () {
-      var element = this.element;
+      var that = this , element = this.element;
       var sideNav = element.find('.sidenav-simple');
+      var powerBTN = element.find('#power-popover');
 
       $('[data-target="' + element.attr('data-role') + '"]').on(Metro.events.click , function() {
         element.toggle();
       });
 
       sideNav.on(Metro.events.enter , function() {
-        sideNav.addClass('sidenav-simple-expand-xxl win-shadow');
+        that.expandSideNavbar();
       });
 
       sideNav.on(Metro.events.leave , function() {
-        sideNav.removeClass('sidenav-simple-expand-xxl win-shadow');
+        that.miniSideNavbar();
       });
+
+      powerBTN.on(Metro.events.click , function() {
+        that.createPopoverEvents(powerBTN);
+      });
+    } ,
+
+    createPopoverEvents: function(elm) {
+      var that = this , popover = Metro.getPlugin(elm , 'popover');
+      var o = this.options;
+
+      popover.options.onPopoverCreate = function() {
+        o.popover = popover;
+
+        popover.options.onPopoverHide = function() {
+          o.popover = null;
+        };
+  
+        popover.popover.on(Metro.events.enter , function() {
+          that.expandSideNavbar();
+        });
+      };
+    } ,
+
+    expandSideNavbar: function() {
+      var sideNav = this.element.find('.sidenav-simple');
+      sideNav.addClass('sidenav-simple-expand-xxl win-shadow hover');
+    } ,
+
+    miniSideNavbar: function() {
+      var sideNav = this.element.find('.sidenav-simple');
+      sideNav.removeClass('sidenav-simple-expand-xxl win-shadow hover');
     }
   });
 }(Metro , m4q));

@@ -51,6 +51,8 @@
 
         _createEvents: function(){
             var that = this, element = this.element, o = this.options;
+            o.popoverOffset = (element.attr('data-offset') !== undefined && element.attr('data-offset') !== null) ?
+              parseInt(element.attr('data-offset')) : o.popoverOffset;
             var event;
 
             switch (o.popoverTrigger) {
@@ -125,6 +127,8 @@
             var neb_pos;
             var id = Utils.elementId("popover");
             var closeButton;
+            var min_width = ($('[data-popover-width-fix="' + element.id() + '"]').length !== 0) ?
+              $('[data-popover-width-fix="' + element.id() + '"]').width() : false;
 
             if (this.popovered) {
                 return ;
@@ -133,6 +137,10 @@
             popover = $("<div>").addClass("popover neb").addClass(o.clsPopover);
             popover.attr("id", id);
 
+            if(min_width) {
+              popover.css('min-width' , min_width);
+            }
+            
             $("<div>").addClass("popover-content").addClass(o.clsPopoverContent).html(o.popoverText).appendTo(popover);
 
             if (o.popoverHide === 0 && o.closeButton === true) {
