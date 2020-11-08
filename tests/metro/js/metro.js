@@ -1,7 +1,7 @@
 /*
  * Metro 4 Components Library v4.4.1  (https://metroui.org.ua)
  * Copyright 2012-2020 Sergey Pimenov
- * Built at 08/11/2020 04:26:14
+ * Built at 08/11/2020 14:12:29
  * Licensed under GPL3
  */
 (function (global, undefined) {
@@ -4537,7 +4537,7 @@ $.noConflict = function() {
     var Metro = {
 
         version: "4.4.1",
-        compileTime: "08/11/2020 04:26:14",
+        compileTime: "08/11/2020 14:12:29",
         buildNumber: "@@build",
         isTouchable: isTouch,
         fullScreenEnabled: document.fullscreenEnabled,
@@ -26253,7 +26253,9 @@ $.noConflict = function() {
 
   var Utils = Metro.utils;
   var startMenuDefaultConfig = {
-    popover: null
+    popover: null ,
+    sideNavStatus: false ,
+    powerPopoverStatus: false
   };
 
   Metro.startMenuSetup = function (options) {
@@ -26291,7 +26293,7 @@ $.noConflict = function() {
     },
 
     _createEvents: function () {
-      var that = this , element = this.element;
+      var that = this , element = this.element , o = this.options;
       var sideNav = element.find('.sidenav-simple');
       var powerBTN = element.find('#power-popover');
 
@@ -26300,15 +26302,25 @@ $.noConflict = function() {
       });
 
       sideNav.on(Metro.events.enter , function() {
+        o.sideNavStatus = true;
         that.expandSideNavbar();
       });
 
       sideNav.on(Metro.events.leave , function() {
+        o.sideNavStatus = false;
         that.miniSideNavbar();
       });
 
       powerBTN.on(Metro.events.click , function() {
         that.createPopoverEvents(powerBTN);
+        o.powerPopoverStatus = !o.powerPopoverStatus;
+        if(o.popover !== null) {
+          if(o.popover.popovered) {
+            o.popover.hide();
+          } else {
+            o.popover.show();
+          }
+        }
       });
     } ,
 
@@ -26324,19 +26336,37 @@ $.noConflict = function() {
         };
   
         popover.popover.on(Metro.events.enter , function() {
+          o.powerPopoverStatus = true;
           that.expandSideNavbar();
+        });
+
+        popover.popover.on(Metro.events.leave , function() {
+          o.powerPopoverStatus = false;
+          that.miniSideNavbar();
         });
       };
     } ,
 
     expandSideNavbar: function() {
+      var o = this.options;
       var sideNav = this.element.find('.sidenav-simple');
-      sideNav.addClass('sidenav-simple-expand-xxl win-shadow hover');
+      if (o.sideNavStatus || o.powerPopoverStatus) {
+        sideNav.addClass('sidenav-simple-expand-xxl win-shadow hover');
+        if(o.popover !== null) {
+          o.popover.show();
+        }
+      }
     } ,
 
     miniSideNavbar: function() {
+      var o = this.options;
       var sideNav = this.element.find('.sidenav-simple');
-      sideNav.removeClass('sidenav-simple-expand-xxl win-shadow hover');
+      if(!o.sideNavStatus && !o.powerPopoverStatus) {
+        if(o.popover !== null) {
+          o.popover.hide();
+        }
+        sideNav.removeClass('sidenav-simple-expand-xxl win-shadow hover');
+      }
     }
   });
 }(Metro , m4q));
