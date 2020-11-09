@@ -1,7 +1,7 @@
 /*
  * Metro 4 Components Library v4.4.1  (https://metroui.org.ua)
  * Copyright 2012-2020 Sergey Pimenov
- * Built at 08/11/2020 14:12:29
+ * Built at 09/11/2020 03:19:58
  * Licensed under GPL3
  */
 *,
@@ -34131,44 +34131,59 @@ input.input-small:-ms-input-placeholder {
       flex-basis: 0;
   overflow: hidden;
 }
-.start-menu {
+[data-role="start-menu"] {
   display: none;
-  background: green;
+  background: rgba(0, 0, 0, 0.4);
   position: fixed;
   left: 0;
   right: auto;
   top: auto;
   bottom: 35px;
-  width: 50%;
+  width: 60%;
   height: 80%;
   -webkit-box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.3);
           box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.3);
 }
-.start-menu .sidenav-simple {
+[data-role="start-menu"] .sidenav-simple {
   height: 100%;
   background-color: transparent;
   color: #ffffff;
 }
-.start-menu .sidenav-simple li {
+[data-role="start-menu"] .sidenav-simple .icon {
+  font-size: 20px;
+}
+[data-role="start-menu"] .sidenav-simple [data-role="profile"] .icon {
+  border-radius: 50px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+[data-role="start-menu"] .sidenav-simple li {
   background-color: transparent;
 }
-.start-menu .sidenav-simple li:hover {
+[data-role="start-menu"] .sidenav-simple li:hover {
   background-color: rgba(255, 255, 255, 0.1);
 }
-.start-menu .sidenav-simple a {
+[data-role="start-menu"] .sidenav-simple a {
   background-color: transparent;
 }
-.start-menu .sidenav-simple a:not([class]):hover {
+[data-role="start-menu"] .sidenav-simple a:not([class]):hover {
   color: unset;
 }
-.start-menu .sidenav-simple.hover {
+[data-role="start-menu"] .sidenav-simple.hover {
   background-color: rgba(0, 0, 0, 0.2);
 }
-.start-menu .sidenav-simple .title {
+[data-role="start-menu"] .sidenav-simple .title {
   text-transform: none;
 }
-.power-popover {
-  left: 0 !important;
+[data-role="power-button"] ul {
+  list-style: none;
+  position: absolute;
+  bottom: 51px;
+  z-index: 1;
+}
+[data-role="power-button"] ul li:hover {
+  background-color: rgba(255, 255, 255, 0.1);
 }
 .stepper {
   display: -webkit-box;

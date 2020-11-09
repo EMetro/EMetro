@@ -1,7 +1,7 @@
 /*
  * Metro 4 Components Library v4.4.1  (https://metroui.org.ua)
  * Copyright 2012-2020 Sergey Pimenov
- * Built at 08/11/2020 14:12:29
+ * Built at 09/11/2020 03:19:58
  * Licensed under GPL3
  */
 (function (global, undefined) {
@@ -4537,7 +4537,7 @@ $.noConflict = function() {
     var Metro = {
 
         version: "4.4.1",
-        compileTime: "08/11/2020 14:12:29",
+        compileTime: "09/11/2020 03:19:58",
         buildNumber: "@@build",
         isTouchable: isTouch,
         fullScreenEnabled: document.fullscreenEnabled,
@@ -26253,9 +26253,14 @@ $.noConflict = function() {
 
   var Utils = Metro.utils;
   var startMenuDefaultConfig = {
-    popover: null ,
-    sideNavStatus: false ,
-    powerPopoverStatus: false
+    elements: {
+      sideNav: '.sidenav-simple' ,
+      powerBTN: '[data-role="power-button"]' ,
+      expandBTN: '[data-role="start-menu-expand"]' ,
+      powerPopover: 'ul' ,
+      startBTN: '[data-target="start-menu"]'
+    } ,
+    sideNavToggleCls: 'sidenav-simple-expand-xxl win-shadow hover'
   };
 
   Metro.startMenuSetup = function (options) {
@@ -26287,86 +26292,48 @@ $.noConflict = function() {
     },
 
     _createStructure: function () {
+      var o = this.options;
       var element = this.element;
 
-      element.addClass("start-menu");
+      o.elements.sideNav = element.find(o.elements.sideNav);
+      o.elements.powerBTN = element.find(o.elements.powerBTN);
+      o.elements.expandBTN = element.find(o.elements.expandBTN);
+      o.elements.powerPopover = o.elements.powerBTN.find(o.elements.powerPopover);
+      o.elements.startBTN = $(document).find(o.elements.startBTN);
     },
 
     _createEvents: function () {
-      var that = this , element = this.element , o = this.options;
-      var sideNav = element.find('.sidenav-simple');
-      var powerBTN = element.find('#power-popover');
+      var o = this.options , that = this;
+      var element = this.element;
 
-      $('[data-target="' + element.attr('data-role') + '"]').on(Metro.events.click , function() {
+      o.elements.expandBTN.on(Metro.events.click , function() {
+        o.elements.sideNav.toggleClass(o.sideNavToggleCls);
+      });
+
+      o.elements.startBTN.on(Metro.events.click , function() {
         element.toggle();
       });
 
-      sideNav.on(Metro.events.enter , function() {
-        o.sideNavStatus = true;
-        that.expandSideNavbar();
+      o.elements.sideNav.on(Metro.events.enter , function() {
+        o.elements.sideNav.addClass(o.sideNavToggleCls);
       });
 
-      sideNav.on(Metro.events.leave , function() {
-        o.sideNavStatus = false;
-        that.miniSideNavbar();
+      o.elements.sideNav.on(Metro.events.leave , function() {
+        that.hidePowerPopover();
+        o.elements.sideNav.removeClass(o.sideNavToggleCls);
       });
 
-      powerBTN.on(Metro.events.click , function() {
-        that.createPopoverEvents(powerBTN);
-        o.powerPopoverStatus = !o.powerPopoverStatus;
-        if(o.popover !== null) {
-          if(o.popover.popovered) {
-            o.popover.hide();
-          } else {
-            o.popover.show();
-          }
-        }
+      o.elements.powerBTN.on(Metro.events.click , function() {
+        o.elements.powerPopover.toggleClass('d-none');
+      });
+
+      o.elements.powerPopover.on(Metro.events.leave , function() {
+        that.hidePowerPopover();
       });
     } ,
 
-    createPopoverEvents: function(elm) {
-      var that = this , popover = Metro.getPlugin(elm , 'popover');
-      var o = this.options;
-
-      popover.options.onPopoverCreate = function() {
-        o.popover = popover;
-
-        popover.options.onPopoverHide = function() {
-          o.popover = null;
-        };
-  
-        popover.popover.on(Metro.events.enter , function() {
-          o.powerPopoverStatus = true;
-          that.expandSideNavbar();
-        });
-
-        popover.popover.on(Metro.events.leave , function() {
-          o.powerPopoverStatus = false;
-          that.miniSideNavbar();
-        });
-      };
-    } ,
-
-    expandSideNavbar: function() {
-      var o = this.options;
-      var sideNav = this.element.find('.sidenav-simple');
-      if (o.sideNavStatus || o.powerPopoverStatus) {
-        sideNav.addClass('sidenav-simple-expand-xxl win-shadow hover');
-        if(o.popover !== null) {
-          o.popover.show();
-        }
-      }
-    } ,
-
-    miniSideNavbar: function() {
-      var o = this.options;
-      var sideNav = this.element.find('.sidenav-simple');
-      if(!o.sideNavStatus && !o.powerPopoverStatus) {
-        if(o.popover !== null) {
-          o.popover.hide();
-        }
-        sideNav.removeClass('sidenav-simple-expand-xxl win-shadow hover');
-      }
+    hidePowerPopover: function() {
+      this.options.elements.powerPopover.addClass('d-none');
     }
   });
 }(Metro , m4q));

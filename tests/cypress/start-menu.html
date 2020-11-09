@@ -1,35 +1,57 @@
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link href="../metro/css/metro-all.css?ver=@@b-version" rel="stylesheet">
-    <title>Start Menu - ElMetro UI library</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link href="../metro/css/metro-all.css?ver=@@b-version" rel="stylesheet">
+  <title>Start Menu - ElMetro UI library</title>
+  <style>
+    body {
+      background: #b92b27;  /* fallback for old browsers */
+      background: -webkit-linear-gradient(to right, #1565C0, #b92b27);  /* Chrome 10-25, Safari 5.1-6 */
+      background: linear-gradient(to right, #1565C0, #b92b27); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    }
+  </style>
 </head>
 <body class="m4-cloak">
   <div class="container">
     <div data-role="start-menu">
-      <ul class="sidenav-simple d-flex flex-column-r" data-popover-width-fix="power-popover">
-        <li><a href="#" data-role="popover" data-popover-text="This is popover!" data-popover-trigger="click"
-              data-popover-position="top" data-popover-hide="0" data-close-button="false" data-cls-popover="power-popover"
-              data-offset="0" id="power-popover">
-            <i class="mi mi-PowerButton icon"></i>
+      <ul class="sidenav-simple d-flex flex-column-r">
+        <li data-role="power-button">
+          <a href="#">
+            <span class="mi mi-PowerButton icon"></span>
             <span class="title">Power</span>
+          </a>
+          <ul class="m-0 p-0 bg-dark w-100 d-none">
+            <li class="px-3"><i class="mi mi-QuietHours mr-2"></i>Sleep</li>
+            <li class="px-3"><i class="mi mi-PowerButton mr-2"></i>Shut down</li>
+            <li class="px-3"><i class="mi mi-Refresh mr-2"></i>Restart</li>
+          </ul>
+        </li>
+        <li><a href="#">
+          <span class="mi mi-Settings icon"></span>
+          <span class="title">Settings</span>
         </a></li>
         <li><a href="#">
-          <span class="mif-apps icon"></span>
-          <span class="title">all items</span>
+          <span class="mi mi-Photo2 icon"></span>
+          <span class="title">Pictures</span>
         </a></li>
         <li><a href="#">
-          <span class="mif-apps icon"></span>
-          <span class="title">all items</span>
+          <span class="mi mi-Page icon"></span>
+          <span class="title">Documents</span>
         </a></li>
-        <li><a href="#">
-          <span class="mif-apps icon"></span>
-          <span class="title">all items</span>
+        <li data-role="profile"><a href="#">
+          <span class="icon" style="background-image: url('https://images.unsplash.com/photo-1518806118471-f28b20a1d79d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80');"></span>
+          <span class="title">ElMetro</span>
         </a></li>
+        <div class="mb-auto">
+          <li class="flex-self-end" data-role="start-menu-expand"><a href="#">
+            <span class="mi mi-GlobalNavigationButton icon"></span>
+            <span class="title text-bold text-upper">Start</span>
+          </a></li>
+        </div>
       </ul>
     </div>
-    <button class="button primary pos-fixed pos-bottom-left" data-target="start-menu">Start</button>
+    <button class="button yellow pos-fixed pos-bottom-left" data-target="start-menu">Start</button>
   </div>
 
   <script src="../metro/js/metro.js?ver=@@b-version"></script>

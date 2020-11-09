@@ -1,25 +1,34 @@
 @import (once) "../../include/vars";
 @import (once) "../../include/mixins";
 
-.start-menu {
+[data-role="start-menu"] {
   display: none;
-  background: green;
+  background: rgba(0,0,0,0.4);
   position: fixed;
   left: 0;
   right: auto;
   top: auto;
   bottom: 35px;
-  width: 50%;
+  width: 60%;
   height: 80%;
   .win-shadow();
   .sidenav-simple {
     height: 100%;
     background-color: transparent;
     color: @white;
+    .icon {
+      font-size: 20px;
+    }
+    [data-role="profile"] .icon {
+      border-radius: 50px;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
     li {
       background-color: transparent;
       &:hover {
-        background-color: rgba(255, 255, 255, 0.1);
+        background-color: @hoveredLink;
       }
     }
     a {
@@ -37,6 +46,14 @@
   }
 }
 
-.power-popover {
-  left: 0 !important;
+[data-role="power-button"] {
+  ul {
+    list-style: none;
+    position: absolute;
+    bottom: 51px;
+    z-index: 1;
+    li:hover {
+      background-color: @hoveredLink;
+    }
+  }
 }
