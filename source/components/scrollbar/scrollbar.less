@@ -1,83 +1,51 @@
-@import (once) "../../include/vars";
-
-@scrollbarBackgroundColor: rgb(232, 232, 232);
-@scrollbarThumbColor: rgba(101, 95, 95, 0.71);
-
-.scrollbar-type-1 {
-    ::-webkit-scrollbar {
-        width: 6px;
-    }
-
-    ::-webkit-scrollbar-track {
-        background-color: @scrollbarBackgroundColor;
-    }
-
-    ::-webkit-scrollbar-thumb {
-        background-color: @scrollbarThumbColor;
-    }
+.ss-wrapper {
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 1;
+  float: left;
 }
 
-.scrollbar-type-2 {
-    ::-webkit-scrollbar {
-        width: 6px;
-    }
-
-    ::-webkit-scrollbar-track {
-        border-radius: 6px;
-        background-color: @scrollbarBackgroundColor;
-    }
-
-    ::-webkit-scrollbar-thumb {
-        border-radius: 6px;
-        background-color: @scrollbarThumbColor;
-    }
+.ss-content {
+  height: 100%;
+  width: calc(100% + 18px);
+  padding: 0 0 0 0;
+  position: relative;
+  overflow: auto;
+  box-sizing: border-box;
 }
 
-.scrollbar-type-3 {
-    ::-webkit-scrollbar {
-        width: 10px;
-    }
-
-    ::-webkit-scrollbar-track {
-        background-color: @scrollbarBackgroundColor;
-    }
-
-    ::-webkit-scrollbar-thumb {
-        background-color: @scrollbarThumbColor;
-    }
+.ss-content.rtl {
+  width: calc(100% + 18px);
+  right: auto;
 }
 
-.scrollbar-type-4 {
-    ::-webkit-scrollbar {
-        width: 12px;
-    }
-
-    ::-webkit-scrollbar-track {
-        border-radius: 10px;
-        background-color: @scrollbarBackgroundColor;
-    }
-
-    ::-webkit-scrollbar-thumb {
-        border-radius: 10px;
-        background-color: @scrollbarThumbColor;
-    }
+.ss-scroll {
+  position: relative;
+  background: rgba(0, 0, 0, 0.1);
+  width: 9px;
+  border-radius: 4px;
+  top: 0;
+  z-index: 2;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.25s linear;
 }
 
-[class*=scrollbar-type-] {
-    * {
-        scrollbar-width: thin;
-        scrollbar-color: @scrollbarThumbColor @scrollbarBackgroundColor;
-    }
+.ss-hidden {
+  display: none;
 }
 
-each(@colorList, {
-    .sb-@{value} {
-        ::-webkit-scrollbar-thumb {
-            background-color: @@value!important;
-        }
+.ss-container:hover .ss-scroll,
+.ss-container:active .ss-scroll {
+  opacity: 1;
+}
 
-        * {
-            scrollbar-color: @@value @scrollbarBackgroundColor!important;
-        }
-    }
-})
+.ss-grabbed {
+  -o-user-select: none;
+  -ms-user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}

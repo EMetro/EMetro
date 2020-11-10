@@ -1,7 +1,7 @@
 /*
  * Metro 4 Components Library v4.4.1  (https://metroui.org.ua)
  * Copyright 2012-2020 Sergey Pimenov
- * Built at 09/11/2020 03:19:58
+ * Built at 10/11/2020 02:02:46
  * Licensed under GPL3
  */
 .accordion {
@@ -13899,6 +13899,20 @@ input.input-small:-ms-input-placeholder {
   height: 100%;
   background-color: transparent;
   color: #ffffff;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  top: 0;
+  right: auto;
+  z-index: 1;
+}
+[data-role="start-menu"] .sidenav-simple::before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 [data-role="start-menu"] .sidenav-simple .icon {
   font-size: 20px;
@@ -13926,6 +13940,31 @@ input.input-small:-ms-input-placeholder {
 }
 [data-role="start-menu"] .sidenav-simple .title {
   text-transform: none;
+}
+[data-role="start-menu"] [data-role="applications"] {
+  padding-left: 50px;
+}
+[data-role="start-menu"] [data-role="applications"] [data-role="recent"] .items-list {
+  overflow-y: auto;
+  overflow-x: auto;
+  height: calc(100% - 30px);
+}
+[data-role="start-menu"] [data-role="applications"] [data-role="recent"] .items-list .item {
+  border: none;
+  height: 40px;
+}
+[data-role="start-menu"] [data-role="applications"] [data-role="recent"] .items-list .item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+[data-role="start-menu"] [data-role="applications"] [data-role="recent"] .items-list .item .avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 0;
+  left: 0;
+  background-color: blueviolet;
+}
+[data-role="start-menu"] [data-role="applications"] [data-role="recent"] .items-list .item .label {
+  padding-left: 50px;
 }
 [data-role="power-button"] ul {
   list-style: none;
