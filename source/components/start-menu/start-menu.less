@@ -3,7 +3,7 @@
 
 [data-role="start-menu"] {
   display: none;
-  background: rgba(0,0,0,0.4);
+  background: rgba(0,0,0,0.7);
   position: fixed;
   left: 0;
   right: auto;
@@ -52,7 +52,7 @@
       }
     }
     &.hover {
-      background-color: rgba(0,0,0,0.2);
+      background-color: rgba(0,0,0,0.7);
     }
     .title {
       text-transform: none;
@@ -85,6 +85,15 @@
       }
     }
   }
+  .os-scrollbar {
+    &.os-scrollbar-vertical {
+      width: 6px;
+    }
+    &.os-scrollbar-horizontal {
+      height: 6px;
+    }
+  }
+  
 }
 
 [data-role="power-button"] {

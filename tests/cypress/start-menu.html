@@ -56,7 +56,9 @@
             <div class="row h-100">
               <div class="cell-4 pl-0 h-100" data-role="recent">
                 <span class="title">Recently added</span>
-                <div class="items-list px-0" data-role="scrollbar">
+                <div class="items-list p-0 mt-2" data-role="scrollbar" data-scrollbar-settings='{
+                  "scrollbars": { "autoHide": "leave" }
+                }'>
                   <div class="item px-0 mt-1">
                     <div class="avatar p-1"><img src="https://metroui.org.ua/images/me.jpg"></div>
                     <span class="label">List item</span>
@@ -103,7 +105,33 @@
                   </div>
                 </div>
               </div>
-              <div class="cell-8" data-role="explore">This is cell 8</div>
+              <div class="cell-4" data-role="productivity">
+                <span class="title">Productivity</span>
+                <div class="tiles-grid mt-2">
+                  <div data-role="tile" class="bg-green selected" data-size="small">
+                    <span class="icon mif-apps"></span>
+                    <span class="branding-bar">Applications</span>
+                  </div>
+                  <div data-size="small" data-role="tile"><span class="mif-github icon"></span></div>
+                  <div data-role="tile" data-size="small">
+                    <span class="branding-bar">Branding bar</span>
+                  </div>
+                  <div data-role="tile" data-size="small"></div>
+                  <div data-role="tile" data-size="small"></div>
+                  <div data-role="tile" data-size="small"></div>
+                </div>
+              </div>
+              <div class="cell-4" data-role="explore">
+                <span class="title">Explore</span>
+                <div class="tiles-grid mt-2">
+                  <div data-role="tile" data-size="small"></div>
+                  <div data-role="tile" data-size="small"></div>
+                  <div data-role="tile" data-size="small"></div>
+                  <div data-role="tile" data-size="small"></div>
+                  <div data-role="tile" data-size="small"></div>
+                  <div data-role="tile" data-size="small"></div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

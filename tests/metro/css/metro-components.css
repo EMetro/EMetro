@@ -1,7 +1,7 @@
 /*
  * Metro 4 Components Library v4.4.1  (https://metroui.org.ua)
  * Copyright 2012-2020 Sergey Pimenov
- * Built at 11/11/2020 03:51:33
+ * Built at 11/11/2020 22:52:57
  * Licensed under GPL3
  */
 .accordion {
@@ -14043,7 +14043,7 @@ THEMES:
 }
 [data-role="start-menu"] {
   display: none;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.7);
   position: fixed;
   left: 0;
   right: auto;
@@ -14095,7 +14095,7 @@ THEMES:
   color: unset;
 }
 [data-role="start-menu"] .sidenav-simple.hover {
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.7);
 }
 [data-role="start-menu"] .sidenav-simple .title {
   text-transform: none;
@@ -14124,6 +14124,12 @@ THEMES:
 }
 [data-role="start-menu"] [data-role="applications"] [data-role="recent"] .items-list .item .label {
   padding-left: 50px;
+}
+[data-role="start-menu"] .os-scrollbar.os-scrollbar-vertical {
+  width: 6px;
+}
+[data-role="start-menu"] .os-scrollbar.os-scrollbar-horizontal {
+  height: 6px;
 }
 [data-role="power-button"] ul {
   list-style: none;

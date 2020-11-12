@@ -1,7 +1,7 @@
 /*
  * Metro 4 Components Library v4.4.1  (https://metroui.org.ua)
  * Copyright 2012-2020 Sergey Pimenov
- * Built at 11/11/2020 03:51:33
+ * Built at 11/11/2020 22:52:57
  * Licensed under GPL3
  */
 (function (global, undefined) {
@@ -4537,7 +4537,7 @@ $.noConflict = function() {
     var Metro = {
 
         version: "4.4.1",
-        compileTime: "11/11/2020 03:51:33",
+        compileTime: "11/11/2020 22:52:57",
         buildNumber: "@@build",
         isTouchable: isTouch,
         fullScreenEnabled: document.fullscreenEnabled,
@@ -23988,7 +23988,11 @@ $.noConflict = function() {
   var Metro = global.Metro;
   var window = global.window;
   var Utils = Metro.utils;
-  var scrollbarDefaultConfig = {};
+  var scrollbarDefaultConfig = {
+    settings: {
+      
+    }
+  };
 
   factory(window, window.document, undefined);
 
@@ -24015,13 +24019,18 @@ $.noConflict = function() {
           this._createStructure();
           this._createEvents();
 
-          this._fireEvent("app-bar-create", {
+          this._fireEvent("scrollbar-create", {
               element: element
           })
       },
 
       _createStructure: function () {
-          
+        var element = this.element , o = this.options;
+        var settings = element.attr('data-scrollbar-settings');
+        settings = (settings === undefined || settings === null) ? {} : JSON.parse(settings);
+        settings = Object.assign(settings , o.settings);
+
+        OverlayScrollbars($('[data-role="scrollbar"]') , settings);
       },
 
       _createEvents: function () {

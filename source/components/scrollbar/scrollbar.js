@@ -18,7 +18,11 @@
   var Metro = global.Metro;
   var window = global.window;
   var Utils = Metro.utils;
-  var scrollbarDefaultConfig = {};
+  var scrollbarDefaultConfig = {
+    settings: {
+      
+    }
+  };
 
   factory(window, window.document, undefined);
 
@@ -45,13 +49,18 @@
           this._createStructure();
           this._createEvents();
 
-          this._fireEvent("app-bar-create", {
+          this._fireEvent("scrollbar-create", {
               element: element
           })
       },
 
       _createStructure: function () {
-        OverlayScrollbars($('[data-role="scrollbar"]') , { });
+        var element = this.element , o = this.options;
+        var settings = element.attr('data-scrollbar-settings');
+        settings = (settings === undefined || settings === null) ? {} : JSON.parse(settings);
+        settings = Object.assign(settings , o.settings);
+
+        OverlayScrollbars($('[data-role="scrollbar"]') , settings);
       },
 
       _createEvents: function () {
