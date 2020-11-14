@@ -1,7 +1,7 @@
 /*
  * Metro 4 Components Library v4.4.1  (https://metroui.org.ua)
  * Copyright 2012-2020 Sergey Pimenov
- * Built at 12/11/2020 04:41:26
+ * Built at 14/11/2020 11:04:08
  * Licensed under GPL3
  */
 (function (global, undefined) {
@@ -4537,11 +4537,17 @@ $.noConflict = function() {
     var Metro = {
 
         version: "4.4.1",
-        compileTime: "12/11/2020 04:41:26",
+        compileTime: "14/11/2020 11:04:08",
         buildNumber: "@@build",
         isTouchable: isTouch,
         fullScreenEnabled: document.fullscreenEnabled,
         sheet: null,
+
+        statuses: {
+          HIDE: 'hide' ,
+          SHOW: 'show' ,
+          TOGGLE: 'toggle'
+        } ,
 
         controlsPosition: {
             INSIDE: "inside",
@@ -30141,37 +30147,91 @@ $.noConflict = function() {
     },
 
     _createEvents: function () {
-      var o = this.options , that = this;
-      var element = this.element;
+      var o = this.options;
+      var that = this;
+
+      $(document).on(Metro.events.click , function(e) {
+        var target = $(e.target);
+        
+        if((target.attr('data-role') !== 'start-menu' && target.parents('[data-role="start-menu"]').length <= 0) &&
+            (target.attr('data-target') !== 'start-menu' && target.parents('[data-target="start-menu"]').length <= 0)) {
+          that.setStartMenuStatus(Metro.statuses.HIDE);
+        }
+      });
 
       o.elements.expandBTN.on(Metro.events.click , function() {
-        o.elements.sideNav.toggleClass(o.sideNavToggleCls);
+        that.setSideNavStatus(Metro.statuses.TOGGLE);
       });
 
       o.elements.startBTN.on(Metro.events.click , function() {
-        element.toggle();
+        that.setStartMenuStatus(Metro.statuses.TOGGLE);
       });
 
       o.elements.sideNav.on(Metro.events.enter , function() {
-        o.elements.sideNav.addClass(o.sideNavToggleCls);
+        that.setSideNavStatus(Metro.statuses.SHOW);
       });
 
       o.elements.sideNav.on(Metro.events.leave , function() {
-        that.hidePowerPopover();
-        o.elements.sideNav.removeClass(o.sideNavToggleCls);
+        that.setSideNavStatus(Metro.statuses.HIDE);
       });
 
       o.elements.powerBTN.on(Metro.events.click , function() {
-        o.elements.powerPopover.toggleClass('d-none');
+        that.setPowerPopoverStatus(Metro.statuses.TOGGLE);
       });
 
       o.elements.powerPopover.on(Metro.events.leave , function() {
-        that.hidePowerPopover();
+        that.setPowerPopoverStatus(Metro.statuses.HIDE);
       });
     } ,
 
-    hidePowerPopover: function() {
-      this.options.elements.powerPopover.addClass('d-none');
+    setStartMenuStatus: function(s) {
+      var element = this.element;
+
+      switch(s) {
+        case Metro.statuses.SHOW:
+          element.show();
+          break;
+        case Metro.statuses.HIDE:
+          element.hide();
+          break;
+        case Metro.statuses.TOGGLE:
+          element.toggle();
+          break;
+      }
+    } ,
+
+    setPowerPopoverStatus: function(s) {
+      var powerPopover = this.options.elements.powerPopover;
+
+      switch(s) {
+        case Metro.statuses.SHOW:
+          powerPopover.removeClass('d-none');
+          break;
+        case Metro.statuses.HIDE:
+          powerPopover.addClass('d-none');
+          break;
+        case Metro.statuses.TOGGLE:
+          powerPopover.toggleClass('d-none');
+          break;
+      }
+    } ,
+
+    setSideNavStatus: function(s) {
+      var o = this.options;
+      var sideNav = o.elements.sideNav;
+
+      switch(s) {
+        case Metro.statuses.SHOW:
+          sideNav.addClass(o.sideNavToggleCls);
+          break;
+        case Metro.statuses.HIDE:
+          this.setPowerPopoverStatus(s);
+          sideNav.removeClass(o.sideNavToggleCls);
+          break;
+        case Metro.statuses.TOGGLE:
+          sideNav.toggleClass(o.sideNavToggleCls);
+          break;
+      }
     }
   });
 }(Metro , m4q));

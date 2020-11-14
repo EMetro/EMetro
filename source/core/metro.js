@@ -34,6 +34,12 @@
         fullScreenEnabled: document.fullscreenEnabled,
         sheet: null,
 
+        statuses: {
+          HIDE: 'hide' ,
+          SHOW: 'show' ,
+          TOGGLE: 'toggle'
+        } ,
+
         controlsPosition: {
             INSIDE: "inside",
             OUTSIDE: "outside"
