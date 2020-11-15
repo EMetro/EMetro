@@ -72,5 +72,8 @@
     "load-grunt-tasks": "^5.1.0",
     "start-server-and-test": "^1.11.0",
     "time-grunt": "^2.0.0"
+  },
+  "dependencies": {
+    "emmet": "^2.2.1"
   }
 }
