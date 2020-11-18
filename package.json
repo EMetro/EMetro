@@ -74,6 +74,7 @@
     "time-grunt": "^2.0.0"
   },
   "dependencies": {
+    "@emetro/core": "^0.0.1",
     "emmet": "^2.2.1"
   }
 }
